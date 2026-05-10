@@ -5,14 +5,20 @@ A community-maintained multi-tool for the [Magma computational algebra system](h
 ## Features
 
 - **`format`** — opinionated source code formatter. Re-implements and extends the upstream [topiary](https://github.com/tweag/topiary) CLI for Magma.
-- **`highlight`** — syntax-highlighted HTML output (planned for v0.2)
+- **`highlight`** — syntax-highlighted terminal (ANSI) and HTML output.
 - **`parse`** — pretty-print a Magma source tree (planned for v0.2)
 
 ## Install
 
-### Pre-built binaries
+### Pre-built binaries (recommended)
 
-Coming soon.
+Run the installer script, which auto-detects your platform and downloads the latest release:
+
+```bash
+curl --proto '=https' --tlsv1.2 -LsSf https://github.com/havarddj/lava/releases/download/v0.1.0/lava-cli-installer.sh | sh
+```
+
+The binary is installed to `~/.cargo/bin` by default.
 
 ### From source
 
@@ -39,14 +45,11 @@ lava format -w file.m
 # Check formatting (CI-friendly)
 lava format --check file.m
 
-# Recursive formatting
-lava format -r src/
+# Highlight to terminal (ANSI colours)
+lava highlight file.m
 
-# Read from stdin
-cat file.m | lava format
-
-# Use a custom topiary query file
-lava format --query my-style.scm file.m
+# Highlight to HTML
+lava highlight --html file.m > out.html
 ```
 
 ## Workspace layout
