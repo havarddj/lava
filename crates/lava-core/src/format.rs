@@ -81,11 +81,18 @@ pub fn format_str(source: &str, opts: &FormatOptions) -> Result<(String, QuerySo
 mod tests {
     use super::*;
 
+    fn fixture(name: &str) -> std::path::PathBuf {
+        std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("tests")
+            .join("topiary-tests")
+            .join(name)
+    }
+
     #[tokio::test(flavor = "current_thread")]
     async fn formats_a_known_fixture() {
-        let input = std::fs::read_to_string("../../topiary/test/input/assert_statement.m")
+        let input = std::fs::read_to_string(fixture("input/assert_statement.m"))
             .expect("fixture missing");
-        let expected = std::fs::read_to_string("../../topiary/test/expected/assert_statement.m")
+        let expected = std::fs::read_to_string(fixture("expected/assert_statement.m"))
             .expect("fixture missing");
         let (actual, _src) = format_str(&input, &FormatOptions::default()).expect("format failed");
         pretty_assertions::assert_eq!(actual, expected);
@@ -93,7 +100,7 @@ mod tests {
 
     #[tokio::test(flavor = "current_thread")]
     async fn round_trip_is_stable() {
-        let input = std::fs::read_to_string("../../topiary/test/input/assert_statement.m").unwrap();
+        let input = std::fs::read_to_string(fixture("input/assert_statement.m")).unwrap();
         let (once, _) = format_str(&input, &FormatOptions::default()).unwrap();
         let (twice, _) = format_str(&once, &FormatOptions::default()).unwrap();
         pretty_assertions::assert_eq!(once, twice, "format is not idempotent");

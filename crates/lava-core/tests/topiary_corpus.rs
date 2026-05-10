@@ -8,10 +8,8 @@ use std::path::PathBuf;
 
 fn corpus_root() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("..")
-        .join("..")
-        .join("topiary")
-        .join("test")
+        .join("tests")
+        .join("topiary-tests")
 }
 
 #[tokio::test(flavor = "current_thread")]

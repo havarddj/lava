@@ -5,9 +5,9 @@ use std::fs;
 fn fixture(name: &str) -> std::path::PathBuf {
     std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("..")
-        .join("..")
-        .join("topiary")
-        .join("test")
+        .join("lava-core")
+        .join("tests")
+        .join("topiary-tests")
         .join(name)
 }
 

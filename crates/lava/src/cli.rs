@@ -39,7 +39,7 @@ pub struct FormatArgs {
     pub write: bool,
 
     /// Exit 1 if any file would change; do not modify files.
-    #[arg(long, conflicts_with = "write")]
+    #[arg(short = 'c', long, conflicts_with = "write")]
     pub check: bool,
 
     /// Print a unified diff alongside --check (default: paths only).

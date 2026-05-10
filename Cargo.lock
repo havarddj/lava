@@ -1279,7 +1279,7 @@ checksum = "009994f150cc0cd50ff54917d5bc8bffe8cad10ca10d81c34da2ec421ae61782"
 [[package]]
 name = "tree-sitter-magma"
 version = "0.1.0"
-source = "git+https://github.com/edgarcosta/tree-sitter-magma.git?rev=023de2f5366bfd4d7435f87313e8e8b187ac5997#023de2f5366bfd4d7435f87313e8e8b187ac5997"
+source = "git+https://github.com/edgarcosta/tree-sitter-magma.git?rev=75b31f4695261967c7aa87d552d69805dc03c77b#75b31f4695261967c7aa87d552d69805dc03c77b"
 dependencies = [
  "cc",
  "tree-sitter-language",

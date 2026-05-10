@@ -18,16 +18,19 @@ pub fn resolve(
     cwd: &Path,
     override_path: Option<&Path>,
 ) -> std::io::Result<(Cow<'static, str>, QuerySource)> {
+
     if let Some(p) = override_path {
         let bytes = std::fs::read_to_string(p)?;
         tracing::debug!(path = %p.display(), "loaded query from --query");
         return Ok((Cow::Owned(bytes), QuerySource::Path(p.to_path_buf())));
     }
+
     if let Some(found) = walk_up(cwd, ".lava/magma.scm") {
         let bytes = std::fs::read_to_string(&found)?;
         tracing::debug!(path = %found.display(), "loaded query from CWD walk-up");
         return Ok((Cow::Owned(bytes), QuerySource::Path(found)));
     }
+
     if let Some(config) = dirs::config_dir() {
         let candidate = config.join("lava").join("magma.scm");
         if candidate.is_file() {
