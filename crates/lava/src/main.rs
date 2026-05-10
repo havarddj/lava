@@ -28,7 +28,7 @@ async fn main() {
 async fn dispatch(cli: Cli) -> anyhow::Result<i32> {
     match cli.command {
         Command::Format(args) => cmd::format::run(args).await,
-        Command::Highlight => cmd::highlight::run().await,
+        Command::Highlight(args) => cmd::highlight::run(args).await,
         Command::Parse => cmd::parse::run().await,
     }
 }

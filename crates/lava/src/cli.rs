@@ -21,12 +21,26 @@ pub enum Command {
     #[command(alias = "fmt")]
     Format(FormatArgs),
 
-    /// Output syntax-highlighted HTML (planned for v0.2)
+    /// Output syntax-highlighted source (default: ANSI terminal colours)
     #[command(alias = "hl")]
-    Highlight,
+    Highlight(HighlightArgs),
 
     /// Parse a file and print the syntax tree (planned for v0.2)
     Parse,
+}
+
+#[derive(clap::Args, Debug)]
+pub struct HighlightArgs {
+    /// Files to highlight. With zero paths or `-`, reads stdin.
+    pub paths: Vec<PathBuf>,
+
+    /// Path to a custom highlight query file.
+    #[arg(long, value_name = "PATH")]
+    pub query: Option<PathBuf>,
+
+    /// Output HTML instead of ANSI terminal colours.
+    #[arg(long)]
+    pub html: bool,
 }
 
 #[derive(clap::Args, Debug)]

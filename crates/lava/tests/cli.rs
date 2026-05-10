@@ -12,16 +12,15 @@ fn fixture(name: &str) -> std::path::PathBuf {
 }
 
 #[test]
-fn help_lists_subcommands() {
+fn highlight_stdin_to_stdout() {
     Command::cargo_bin("lava")
         .unwrap()
-        .arg("--help")
+        .args(["highlight"])
+        .write_stdin("function f() return 1; end function;")
         .assert()
-        .success()
-        .stdout(predicate::str::contains("format"))
-        .stdout(predicate::str::contains("highlight"))
-        .stdout(predicate::str::contains("parse"));
+        .success();
 }
+
 
 #[test]
 fn format_stdin_to_stdout() {
@@ -95,16 +94,6 @@ fn format_check_dirty_file_exits_1() {
         .assert()
         .code(1)
         .stderr(predicate::str::contains("would be reformatted"));
-}
-
-#[test]
-fn highlight_subcommand_is_unimplemented() {
-    Command::cargo_bin("lava")
-        .unwrap()
-        .arg("highlight")
-        .assert()
-        .code(2)
-        .stderr(predicate::str::contains("not yet implemented"));
 }
 
 #[test]

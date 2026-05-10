@@ -10,10 +10,12 @@ publish = false
 [dependencies]
 topiary-core = "0.7"
 topiary-tree-sitter-facade = "0.7"
+tree-sitter-highlight = "0.26.8"
 tree-sitter-magma = { workspace = true }
 thiserror = "1"
 tracing = "0.1"
 dirs = "5"
+nu-ansi-term = "0.50"
 
 [dev-dependencies]
 tokio = { version = "1", features = ["rt", "macros"] }

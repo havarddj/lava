@@ -363,7 +363,7 @@
 
 ;; Comprehension separators ":" and "|" inside aggregates
 ;; (one explicit rule per aggregate node — bracket-list-of-parents matched
-;;  ":" globally including in require_statement, so we list each parent).
+;; ":" globally including in require_statement, so we list each parent).
 (seqenum     ":" @prepend_space @append_space)
 (list        ":" @prepend_space @append_space)
 (set         ":" @prepend_space @append_space)

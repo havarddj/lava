@@ -5,7 +5,7 @@ use std::borrow::Cow;
 use std::path::{Path, PathBuf};
 
 /// Embedded canonical Magma query file.
-pub const EMBEDDED: &str = include_str!("magma.scm");
+pub const EMBEDDED: &str = include_str!("../queries/topiary.scm");
 
 /// Resolve which query string to use, plus its source for diagnostics.
 ///
