@@ -10,3 +10,8 @@ repository = "https://github.com/havarddj/lava"
 
 [workspace.dependencies]
 tree-sitter-magma = { git = "https://github.com/edgarcosta/tree-sitter-magma.git", rev = "75b31f4695261967c7aa87d552d69805dc03c77b" }
+
+# The profile that 'dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
