@@ -1,5 +1,6 @@
+use std::io::Write;
 use std::path::PathBuf;
-use tree_sitter_highlight::{HighlightConfiguration, HighlightEvent, Highlighter};
+use tree_sitter_highlight::{HighlightConfiguration, HighlightEvent, Highlighter, HtmlRenderer};
 use crate::Result;
 use crate::error::Error;
 
@@ -120,31 +121,18 @@ fn render_html<'a>(
     source: &str,
     highlights: impl Iterator<Item = std::result::Result<HighlightEvent, tree_sitter_highlight::Error>>,
 ) -> Result<String> {
-    let mut output = String::new();
-    let mut stack: Vec<usize> = Vec::new();
+    let mut renderer = HtmlRenderer::new();
+    renderer.render(
+        highlights,
+        source.as_bytes(),
+        &|highlight, output| {
+            let name = HIGHLIGHT_NAMES[highlight.0];
+            write!(output, r#"class="{}""#, name).unwrap();
+        },
+    ).unwrap();
 
-    for event in highlights {
-        match event.unwrap() {
-            HighlightEvent::Source {start, end} => {
-                let text = &source[start..end];
-                for &class_ix in &stack {
-                    let class = HIGHLIGHT_NAMES[class_ix];
-                    output.push_str(&format!("<span class=\"{}\">", class));
-                }
-                output.push_str(text);
-                for _ in &stack {
-                    output.push_str("</span>");
-                }
-            },
-            HighlightEvent::HighlightStart(s) => {
-                stack.push(s.0);
-            },
-            HighlightEvent::HighlightEnd => {
-                stack.pop();
-            },
-        }
-    }
-    Ok(output)
+    let html = renderer.lines().collect::<Vec<_>>().join("");
+    Ok(html)
 }
 
 fn render_terminal<'a>(

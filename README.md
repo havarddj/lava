@@ -15,7 +15,7 @@ A community-maintained multi-tool for the [Magma computational algebra system](h
 Run the installer script, which auto-detects your platform and downloads the latest release:
 
 ```bash
-curl --proto '=https' --tlsv1.2 -LsSf https://github.com/havarddj/lava/releases/download/v0.1.0/lava-cli-installer.sh | sh
+curl --proto '=https' --tlsv1.2 -LsSf https://github.com/havarddj/lava/releases/latest/download/lava-cli-installer.sh | sh
 ```
 
 The binary is installed to `~/.cargo/bin` by default.
