@@ -5,7 +5,7 @@ use clap::Parser;
 use cli::{Cli, Command};
 use tracing_subscriber::EnvFilter;
 
-#[tokio::main(flavor = "current_thread")]
+#[tokio::main]
 async fn main() {
     tracing_subscriber::fmt()
         .with_env_filter(
@@ -30,5 +30,6 @@ async fn dispatch(cli: Cli) -> anyhow::Result<i32> {
         Command::Format(args) => cmd::format::run(args).await,
         Command::Highlight(args) => cmd::highlight::run(args).await,
         Command::Parse => cmd::parse::run().await,
+        Command::Test(args) => cmd::test::run(args).await,
     }
 }

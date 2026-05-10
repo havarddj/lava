@@ -10,8 +10,10 @@ publish = false
 [dependencies]
 topiary-core = "0.7"
 topiary-tree-sitter-facade = "0.7"
+tree-sitter = "0.26"
 tree-sitter-highlight = "0.26.8"
 tree-sitter-magma = { workspace = true }
+streaming-iterator = "0.1"
 thiserror = "1"
 tracing = "0.1"
 dirs = "5"

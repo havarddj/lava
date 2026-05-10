@@ -27,6 +27,20 @@ pub enum Command {
 
     /// Parse a file and print the syntax tree (planned for v0.2)
     Parse,
+
+    #[command(
+        alias = "t",
+        about = "Run Magma test procedures.\n\n\
+            Tests are discovered from .m files in the test/ or tests/ directory.\n\
+            Each top-level procedure is treated as a test case. To skip a test,\n\
+            add a `// ignore` comment (case-insensitive) on the line before it:\n\n    \
+                // ignore\n    \
+                procedure test_not_ready_yet()\n        \
+                    // ...\n    \
+                end procedure;\n\n\
+            Tests run in parallel and output is colorized (green=pass, red=fail)."
+    )]
+    Test(TestArgs),
 }
 
 #[derive(clap::Args, Debug)]
@@ -75,4 +89,18 @@ pub struct FormatArgs {
     /// Filename to display in diagnostics when reading from stdin.
     #[arg(long, value_name = "PATH")]
     pub stdin_filename: Option<PathBuf>,
+}
+
+#[derive(clap::Args, Debug)]
+pub struct TestArgs {
+    /// Files or directories containing tests. Defaults to `test/` or `tests/`.
+    pub paths: Vec<PathBuf>,
+
+    /// Path to the Magma binary. Defaults to `magma` in PATH.
+    #[arg(long, value_name = "PATH")]
+    pub magma: Option<PathBuf>,
+
+    /// Show ignored tests in output (hidden by default).
+    #[arg(long)]
+    pub include_ignored: bool,
 }
