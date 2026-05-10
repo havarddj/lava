@@ -64,6 +64,9 @@
 (function_definition
  ["function" "end"] @keyword.function)
 
+(function_definition
+ name: (identifier) @variable)
+
 (procedure_definition
  ["procedure" "end"] @keyword.function)
 
