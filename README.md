@@ -93,8 +93,8 @@ end procedure;
 Supported tags are:
 
 - `skip`: skip this test when running the test runner. Can either be a boolean, or a list of tags (and skip if these tags are passed via `lava test --tags=foo,bar`)
-- `skip_unless`: skip test unless either of
-- `parallel`: whether to run in parallel or not (default: `true`)
+- `skip_unless`: skip test unless `foo` or `bar` are passed via `--tags`.
+- `parallel`: whether to run in parallel or not (default: `true`).
 - `timeout`: if the test runs slower than this (specified in seconds), the `lava` raise a warning.
   A global timeout can be applied to all tests (regardless of their `toml` value) by passing `lava test --timeout=n`. A value of `0` to timeout is treated as infinity.
 
